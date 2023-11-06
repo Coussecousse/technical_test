@@ -142,3 +142,8 @@ button {
   border: none;
   background-color: transparent;
 }
+
+/* HEADER ACTIVE LINKS */
+header nav a.active {
+  color: var(--color-900);
+}
