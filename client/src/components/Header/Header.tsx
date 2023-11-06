@@ -25,7 +25,7 @@ export default function Header() {
                     <li><NavLink to={paths.HOME}>Accueil</NavLink></li>
                     <li><NavLink to={paths.GET_TICKET}>Se garer</NavLink></li>
                     <li><NavLink to={paths.LEAVE_PARKING}>Quitter le parking</NavLink></li>
-                    <li><NavLink to={paths.SEE_PARKING}>Parking</NavLink></li>
+                    <li><NavLink to={paths.SEE_PARKING}>Voir le parking</NavLink></li>
                 </ul>
             </nav>
             <button className={`${styles.mobileButton} ${isMenuOpen ? styles.open : '' }`} onClick={handleMenu}><span></span><span></span><span></span></button>

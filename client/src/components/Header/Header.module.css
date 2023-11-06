@@ -78,6 +78,7 @@
     z-index: -1;
     transition: .2s linear;
 }
+
 .linksContainer a:hover::after {
     width: 100%;
 }       
@@ -89,9 +90,12 @@
         display: none;
     }
     .navContainer {
-        width: auto;
-        position: static;
+        z-index: 0;
         padding: 0;
+        position: static;
+        width: fit-content;
+        margin: auto;
+        transform: translateY(0);
     }
     .linksContainer {
         flex-direction: row;
