@@ -1,9 +1,13 @@
 :root {
-  --color-400 : #fff;
+  --color-300 : #fff;
+  --color-400 : #f3f6f4;
   --color-500: #f5e8b7;
   --color-600: #c1d8c3;
+  --color-650: #92BA96;
   --color-700: #6a9c89;
+  --color-750: #4A6F61;
   --color-800: #cd5c08;
+  --color-850: #833B05;
   --color-900: #6b3004;
 }
 
@@ -115,6 +119,7 @@ section {
 body {
   line-height: 1;
   background: var(--color-500);
+  background: #f3f6f4;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
 }
@@ -142,7 +147,10 @@ button {
   border: none;
   background-color: transparent;
 }
-
+main {
+  min-height: calc(100vh - 50px);
+  display: flex;
+}
 /* HEADER ACTIVE LINKS */
 header nav a.active {
   color: var(--color-900);
