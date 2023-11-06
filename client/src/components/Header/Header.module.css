@@ -1,0 +1,72 @@
+.header {
+    position: relative;
+    width: 100vw;
+    padding: 0 2rem;
+    background-color: var(--color-800);
+    height: 50px;
+    color: var(--color-400);
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: .05rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.mobileButton {
+    width: 34px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.mobileButton > * {
+    height: 2px;
+    background-color: var(--color-400);
+    width: 100%;
+}
+.navContainer {
+    width: 100vw;
+    position: absolute;
+    padding: 1rem 0;
+    background-color: var(--color-800);
+    top: 100%;
+    left: 0;
+}
+.linksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+.linksContainer a {
+    position: relative;
+    z-index: 1;
+}
+.linksContainer a::after {
+    content: '';
+    position: absolute;
+    background: var(--color-900);
+    height: 8px;
+    width: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: .2s linear;
+}
+.linksContainer a:hover::after {
+    width: 100%;
+}       
+
+@media screen  and (min-width: 768px) {
+    .mobileButton {
+        display: none;
+    }
+    .navContainer {
+        width: auto;
+        position: static;
+        padding: 0;
+    }
+    .linksContainer {
+        flex-direction: row;
+    }
+}
