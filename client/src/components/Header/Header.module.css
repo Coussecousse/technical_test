@@ -1,7 +1,6 @@
 .header {
     position: relative;
     width: 100vw;
-    padding: 0 2rem;
     background-color: var(--color-800);
     height: 50px;
     color: var(--color-400);
@@ -13,6 +12,17 @@
     align-items: center;
 }
 
+/* Container */
+.buttonContainer {
+    padding: 0 2rem;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: var(--color-800);
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
 /* MOBILE BUTTON */
 .mobileButton {
     position: relative;
@@ -43,7 +53,7 @@
 
 /* NAV */
 .navContainer {
-    z-index: -1;
+    z-index: 10;
     width: 100vw;
     position: absolute;
     padding: 1rem 0;
@@ -75,7 +85,7 @@
     width: 0;
     right: 0;
     bottom: 0;
-    z-index: -1;
+    z-index: 1;
     transition: .2s linear;
 }
 
@@ -86,7 +96,7 @@
 /* MEDIAQUERIES */
 
 @media screen  and (min-width: 768px) {
-    .mobileButton {
+    .buttonContainer {
         display: none;
     }
     .navContainer {

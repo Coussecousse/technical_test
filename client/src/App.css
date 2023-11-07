@@ -148,8 +148,6 @@ button {
   background-color: transparent;
 }
 main {
-  position: relative;
-  z-index: -999;
   min-height: calc(100vh - 50px);
   display: flex;
 }
