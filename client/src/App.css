@@ -9,6 +9,13 @@
   --color-800: #cd5c08;
   --color-850: #833B05;
   --color-900: #6b3004;
+
+  --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  --fs-600: 1.2rem;
+  --fs-700: 1.4rem;
+
+  --animation: popUp .5s forwards;
 }
 
 html,
@@ -157,4 +164,14 @@ header nav a.active {
 }
 header nav a.active::after  {
   background: var(--color-400);
+}
+
+/* Animations */
+@keyframes popUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }

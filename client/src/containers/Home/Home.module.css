@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
     transition: .2s;
-    font-size: 1.2rem;
+    font-size: var(--fs-600);
 }
 .link:first-child {
     border-radius: 1rem 1rem 0 0;
