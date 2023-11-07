@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import Layout from './hoc/Layout/Layout';
 import { Routes, Route } from 'react-router-dom';
@@ -10,7 +11,20 @@ import SeeParking from './containers/SeeParking/SeeParking';
 import LeaveParking from './containers/LeaveParking/LeaveParking';
 
 
+interface TestData {
+  message: string
+}
+
 function App() {
+
+  const [ data, setData ] = useState< string | undefined>(undefined)
+
+  useEffect(() => {
+    fetch('/test')
+    .then(res => res.json())
+    .then((data : TestData) => setData(data.message))
+  }, [])
+
   return (
     <div className="App">
       <Layout>
