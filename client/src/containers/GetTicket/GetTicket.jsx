@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import paths from "../../config/paths";
 import styles from "./GetTicket.module.css";
+
+import paths from "../../config/paths";
 
 export default function GetTicket() {
 
@@ -10,7 +11,7 @@ export default function GetTicket() {
 
   useEffect(() => {
     if (data.length > 0) return;
-    fetch('/create-ticket')
+    fetch(paths.SEE_PARKING_API)
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => {
@@ -22,7 +23,7 @@ export default function GetTicket() {
 
   return (
     <main>
-      <div className={styles.ticket}>
+      <div className={`ticket ${styles.getTicket}`}>
         { error ? (
           <p>Une erreur est survenue...</p>
         ) : (
@@ -34,10 +35,10 @@ export default function GetTicket() {
               <span>Place :</span> {data.parking_place_id ? data.parking_place_id : "..."}
             </p>
             <p>Pensez à garder votre ID sous la main !</p>
-            <a href={paths.SEE_PARKING} className={styles.button}>
+            <a href={paths.SEE_PARKING} className={`${styles.button} button`}>
               Trouver sa place
             </a>
-            <a href={paths.SEE_PARKING} className={styles.button}>
+            <a href={paths.SEE_PARKING} className={`${styles.button} button`}>
               Changer de place
             </a>
           </>

@@ -5,7 +5,8 @@
   --color-600: #c1d8c3;
   --color-650: #92BA96;
   --color-700: #6a9c89;
-  --color-750: #4A6F61;
+  --color-750-05: rgba(73, 110, 96, .5);
+  --color-750: #496e60;
   --color-800: #cd5c08;
   --color-850: #833B05;
   --color-900: #6b3004;
@@ -165,7 +166,40 @@ header nav a.active {
 header nav a.active::after  {
   background: var(--color-400);
 }
-
+input {
+  border: none;
+  background-color: inherit;
+}
+input:focus-visible {
+  border: none;
+  outline: none;
+}
+/* TICKET */
+.ticket {
+  height: clamp(25vh, 400px, 80vh);
+  width: clamp(25vh, 300px, 80vh);
+  margin: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  animation: var(--animation);
+}
+/* BUTTON */
+.button {
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  transition: 0.2s;
+  min-width: 175px;
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+}
 /* Animations */
 @keyframes popUp {
   from {
