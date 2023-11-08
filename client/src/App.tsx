@@ -17,14 +17,6 @@ interface TestData {
 
 function App() {
 
-  const [ data, setData ] = useState< string | undefined>(undefined)
-
-  useEffect(() => {
-    fetch('/test')
-    .then(res => res.json())
-    .then((data : TestData) => setData(data.message))
-  }, [])
-
   return (
     <div className="App">
       <Layout>

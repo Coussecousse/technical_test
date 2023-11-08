@@ -1,6 +1,7 @@
-import { Controller, Get } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { TicketService } from "./ticket.service";
 import { Ticket } from "./entity/ticket.entity";
+import { TicketDto } from "./dto/ticket.dto";
 
 @Controller()
 export class TicketController {
@@ -11,8 +12,8 @@ export class TicketController {
         return this.ticketService.createTicket();
     }
 
-    @Get('/delete-all-tickets')
-    deleteAllTickets(): Promise<boolean> {
-        return this.ticketService.deleteAllTickets();
+    @Post('/leave-parking')
+    deleteTicket(@Body() dto: TicketDto): Promise<Object> {
+        return this.ticketService.deleteTicket(dto.unique_id);
     }
 }

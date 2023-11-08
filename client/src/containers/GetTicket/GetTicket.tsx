@@ -3,15 +3,20 @@ import styles from "./GetTicket.module.css";
 
 import paths from "../../config/paths";
 
+interface Data {
+  unique_id: string,
+  parking_place_id: string
+}
+
 export default function GetTicket() {
 
-  const [data, setData] = useState({});
-  const [error, setError] = useState(false);
+  const [data, setData] = useState<Data | null>(null);
+  const [error, setError] = useState<Boolean>(false);
 
 
   useEffect(() => {
-    if (data.length > 0) return;
-    fetch(paths.SEE_PARKING_API)
+    if (data) return;
+    fetch(paths.GET_TICKET_API)
     .then(res => res.json())
     .then(data => setData(data))
     .catch(err => {
@@ -29,10 +34,10 @@ export default function GetTicket() {
         ) : (
           <>
             <h2 className={styles.important}>
-              <span>ID unique :</span> {data.unique_id ? data.unique_id : "..."}
+              <span>ID unique :</span> {data ? data.unique_id : "..."}
             </h2>
             <p className={styles.important}>
-              <span>Place :</span> {data.parking_place_id ? data.parking_place_id : "..."}
+              <span>Place :</span> {data ? data.parking_place_id : "..."}
             </p>
             <p>Pensez à garder votre ID sous la main !</p>
             <a href={paths.SEE_PARKING} className={`${styles.button} button`}>

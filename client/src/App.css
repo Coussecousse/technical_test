@@ -169,6 +169,7 @@ header nav a.active::after  {
 input {
   border: none;
   background-color: inherit;
+  padding-left: .5rem;
 }
 input:focus-visible {
   border: none;
@@ -200,7 +201,23 @@ input:focus-visible {
   width: fit-content;
   margin: 0 auto;
 }
-/* Animations */
+
+/* ERROR MESSAGES */
+.inputContainer {
+  position: relative;
+}
+.data-message {
+  position: absolute;
+  width: 100%;
+  top: calc(100% + .5rem);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.data-error {
+  color: red;
+}
+
+/* ANIMATIONS */
 @keyframes popUp {
   from {
     transform: scale(0);

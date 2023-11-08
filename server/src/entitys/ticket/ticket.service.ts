@@ -2,6 +2,8 @@ import { Injectable, Inject } from "@nestjs/common";
 import { Ticket } from "./entity/ticket.entity";
 import { generateRandomId } from "./utils/ticketUtils";
 import { ParkingPlaceService } from "../parking_place/parkingPlace.service";
+import { TicketDto } from "./dto/ticket.dto";
+import { ParkingPlace } from "../parking_place/entity/parking_place.entity";
 
 @Injectable()
 export class TicketService {
@@ -37,15 +39,16 @@ export class TicketService {
         }
     }
 
-    async deleteAllTickets(): Promise<boolean> {
+    async deleteTicket(unique_id : number): Promise<Object> {
         try {
-            const tickets = await this.ticketRepository.findAll<Ticket>();
-            await Promise.all(tickets.map(ticket => ticket.destroy()));
-            return true;
+            const ticket = await this.ticketRepository.findOne<Ticket>({ where: { unique_id : unique_id } });
+            await ticket.destroy();
+            await this.parkingPlaceService.removeTicket(unique_id);
+            return { status: 'success' };
         } catch (error) {
-            console.error(error);
-            return false;
+            if (error) {
+                return { status: 'error', message: 'Mauvais ID.' };
+            }
         }
     }
-    
 }
