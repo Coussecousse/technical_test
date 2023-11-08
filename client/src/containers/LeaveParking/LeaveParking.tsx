@@ -50,7 +50,7 @@ export default function LeaveParking() {
 
     return (
         <main>
-            <div className={`ticket ${styles.leaveTicket}`}>
+            <div className={`ticket container${styles.leaveTicket}`}>
                 <form onSubmit={handleForm} className={styles.form}>
                     <label htmlFor="ticket_id">
                         ID de votre ticket :

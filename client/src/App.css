@@ -11,6 +11,9 @@
   --color-850: #833B05;
   --color-900: #6b3004;
 
+  --color-free : #99CC99  ;
+  --color-occupied : #FF7F7F;
+
   --shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   --fs-600: 1.2rem;
@@ -151,6 +154,7 @@ table {
   border-spacing: 0;
 }
 button {
+  cursor: pointer;
   padding: 0;
   border: none;
   background-color: transparent;
@@ -175,14 +179,27 @@ input:focus-visible {
   border: none;
   outline: none;
 }
-/* TICKET */
-.ticket {
-  height: clamp(25vh, 400px, 80vh);
-  width: clamp(25vh, 300px, 80vh);
+/* GENERAL */
+.container {
   margin: auto;
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: var(--shadow);
+}
+
+/* TITLES */
+/* Titles */
+.important {
+  font-size: var(--fs-600);
+}
+.important span {
+  font-weight: 700;
+  text-decoration: underline;
+}
+/* TICKET */ 
+.ticket {
+  height: clamp(25vh, 400px, 80vh);
+  width: clamp(25vh, 300px, 80vh);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -192,7 +209,6 @@ input:focus-visible {
 }
 /* BUTTON */
 .button {
-  cursor: pointer;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
   transition: 0.2s;

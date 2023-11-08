@@ -28,17 +28,17 @@ export default function GetTicket() {
 
   return (
     <main>
-      <div className={`ticket ${styles.getTicket}`}>
+      <div className={`ticket container${styles.getTicket}`}>
         { error ? (
           <p>Une erreur est survenue...</p>
         ) : (
           <>
-            <h2 className={styles.important}>
+            <h2 className='important'>
               <span>ID unique :</span> {data ? data.unique_id : "..."}
             </h2>
-            <p className={styles.important}>
+            <h3 className='important'>
               <span>Place :</span> {data ? data.parking_place_id : "..."}
-            </p>
+            </h3>
             <p>Pensez à garder votre ID sous la main !</p>
             <a href={paths.SEE_PARKING} className={`${styles.button} button`}>
               Trouver sa place
