@@ -23,6 +23,7 @@
     height: 1.5rem;
     background-color: var(--color-750-05);
     border-bottom: var(--color-750) solid 1px;   
+    color: black;
 }
 .form input:focus-visible, .form input:focus {
     outline: var(--color-750) solid 1px;

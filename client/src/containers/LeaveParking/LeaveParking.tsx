@@ -1,16 +1,15 @@
 import styles from './LeaveParking.module.css'
+import { useState } from 'react'
 
 import paths from "../../config/paths"
 
 export default function LeaveParking() {
 
-    const handleForm = () => {
-
+    const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // handle form submission logic here
     }
     
-    const handleChange = () => {
-        
-    }    
 
     return (
         <main>
@@ -19,7 +18,7 @@ export default function LeaveParking() {
                     <label htmlFor="ticket_id">
                         ID de votre ticket :
                     </label>
-                    <input type="number" name="ticket_id" id="ticket_id" onChange={handleChange}  />
+                    <input type="number" name="ticket_id" id="ticket_id" />
                     <button type="submit" className={`${styles.button} button`}>Quitter le parking</button>
                 </form>
             </div>
