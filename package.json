@@ -1,0 +1,27 @@
+{
+  "name": "test_1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server" : "cd server && nest start --watch",
+    "client": "cd client && npm start",
+    "seed": "cd server && npx sequelize-cli db:seed:all",
+    "start": "concurrently \"npm run server\" \"npm run client\" \"npm run seed\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coussecousse/test_1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Coussecousse/test_1/issues"
+  },
+  "homepage": "https://github.com/Coussecousse/test_1#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
