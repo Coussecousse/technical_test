@@ -153,6 +153,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
 button {
   cursor: pointer;
   padding: 0;

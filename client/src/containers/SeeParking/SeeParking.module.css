@@ -1,4 +1,7 @@
 /* GLOBAL */
+.main {
+    flex-direction: column;;
+}
 .elementsContainer {
     border: 2px solid var(--color-800);
     width: clamp(300px, 90%, 1021px);
@@ -89,7 +92,13 @@
         width: 700px;
     }
 }
-
+/* TICKET */
+.hidden {
+    display: none;
+}
+.ticket {
+    margin-bottom: 2rem;
+}
 /* ANIMATIONS */
 @keyframes appear {
     from {

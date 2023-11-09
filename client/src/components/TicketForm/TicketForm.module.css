@@ -1,0 +1,45 @@
+.leaveTicket {
+    background: var(--color-700);
+}
+.updateTicket {
+    background: var(--color-800); 
+}
+
+/* FORM */
+.form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+}
+
+.form label {
+    font-size: var(--fs-600);
+    font-weight: 700;
+    text-decoration: underline;
+}
+.inputContainer {
+    margin: auto;
+    width: 80%;
+    min-width: 200px;
+}
+/* FORM */
+.form input {
+    width: 100%;
+    height: 1.5rem;
+    background-color: var(--color-750-05);
+    border-bottom: var(--color-750) solid 1px;   
+    color: black;
+}
+.form input:focus-visible, .form input:focus {
+    outline: var(--color-750) solid 1px;
+    border: white solid 1px;
+}
+.form .button {
+    background-color: var(--color-600);
+    font-size: 1rem;
+}
+.form .button:hover {
+    background-color: var(--color-400);
+}
