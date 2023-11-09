@@ -1,8 +1,15 @@
 import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectors } from "../../redux/reducers/places";
 import styles from "./SeeParking.module.css";
+
 import paths from "../../config/paths";
+import RowPlaces from "../../components/RowParking/RowPlaces/RowPlaces";
+import RowEmpty from "../../components/RowParking/RowEmpty/RowEmpty";
 
 export default function SeeParking() {
+  const parking: any = useSelector(selectors.getPlacesValue);
+
   const informations = useRef<HTMLDivElement>(null);
   const map = useRef<HTMLDivElement>(null);
   const placeSelected = useRef<HTMLHeadingElement>(null);
@@ -26,219 +33,20 @@ export default function SeeParking() {
     }
     map.current?.classList.add(styles.close);
   };
+
   return (
     <main>
       <div className={`container ${styles.elementsContainer}`}>
         <div className={styles.map} ref={map}>
-          {/* faire un map ici */}
-          <div className={styles.places}>
-            <button
-              onClick={handleButton}
-              data-place='1'
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              1
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              2
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              3
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              4
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            >
-              5
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              6
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              7
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              8
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            >
-              9
-            </button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            >
-              10
-            </button>
-          </div>
-          <div></div>
-          <div className={styles.places}>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='true'
-              className={`${styles.place} ${styles.occupied}`}
-            ></button>
-          </div>
-          <div className={styles.places}>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-            <button
-              onClick={handleButton}
-              data-place=''
-              data-occupied='false'
-              className={`${styles.place} ${styles.free}`}
-            ></button>
-          </div>
-          <div></div>
+          {parking.places.length > 0 && (
+            <>
+              <RowPlaces index={0} max={9} handleButton={handleButton} />
+              <RowEmpty></RowEmpty>
+              <RowPlaces index={10} max={19} handleButton={handleButton} />
+              <RowPlaces index={20} max={29} handleButton={handleButton} />
+              <RowEmpty></RowEmpty>
+            </>
+          )}
         </div>
         <div
           className={`${styles.informations} ${styles.hidden}`}

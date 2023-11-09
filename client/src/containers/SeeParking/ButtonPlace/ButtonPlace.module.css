@@ -1,0 +1,14 @@
+.place {
+    border: solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--fs-600);
+}
+.place.free {
+    background-color: var(--color-free);
+}
+.place.occupied {
+    cursor: not-allowed;
+    background-color: var(--color-occupied);
+}

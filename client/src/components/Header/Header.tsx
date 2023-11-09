@@ -16,7 +16,7 @@ export default function Header() {
     } else {
       dispatch({ type: actionTypes.OPEN_MENU });
     }
-  };
+  }
 
   return (
     <header className={styles.header}>

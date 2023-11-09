@@ -1,4 +1,4 @@
-import { OPEN_MENU, CLOSE_MENU } from "./actionTypes";
+import { OPEN_MENU, CLOSE_MENU } from "./menuActionTypes";
 
 interface OpenMenuAction {
     type : typeof OPEN_MENU

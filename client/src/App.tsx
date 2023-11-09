@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import './App.css';
 import Layout from './hoc/Layout/Layout';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { updatePlaces } from './redux/reducers/places/actions/placesActions';
+import { AppDispatch } from './redux/store';
 
 import paths from './config/paths';
 
@@ -10,12 +13,13 @@ import GetTicket from './containers/GetTicket/GetTicket';
 import SeeParking from './containers/SeeParking/SeeParking';
 import LeaveParking from './containers/LeaveParking/LeaveParking';
 
-
-interface TestData {
-  message: string
-}
-
 function App() {
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(updatePlaces());
+  }, [dispatch]);
 
   return (
     <div className="App">

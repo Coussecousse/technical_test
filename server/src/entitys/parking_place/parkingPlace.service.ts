@@ -33,15 +33,19 @@ export class ParkingPlaceService {
     return place.update({ occupied: true, ticket_unique_id: ticket_unique_id });
   }
 
-  async removeTicket(
-    ticket_id: number
-  ):Promise<ParkingPlace> {
+  async removeTicket(ticket_id: number): Promise<ParkingPlace> {
     const place = await this.parkingPlaceRepository.findOne({
       where: {
-        ticket_unique_id: ticket_id
-      }
-    })
+        ticket_unique_id: ticket_id,
+      },
+    });
 
-    return place.update({ occupied: false, ticket_unique_id: null })
+    return place.update({ occupied: false, ticket_unique_id: null });
+  }
+
+  async getAllPlaces(): Promise<ParkingPlace[]> {
+    return this.parkingPlaceRepository.findAll<ParkingPlace>({
+      attributes: ['place', 'occupied'],
+    });
   }
 }

@@ -5,4 +5,8 @@ import { ParkingPlaceService } from "./parkingPlace.service";
 export class ParkingPlaceController {
     constructor(private parkingPlace: ParkingPlaceService) {}
 
+    @Get('/get-places')
+    getAllPlaces(): Promise<Object> {
+        return this.parkingPlace.getAllPlaces();
+    }
 }
