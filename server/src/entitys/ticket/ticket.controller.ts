@@ -12,6 +12,10 @@ export class TicketController {
         return this.ticketService.createTicket();
     }
 
+    @Post('/create-ticket')
+    createTicketPost(@Body() dto: TicketDto): Promise<Ticket> {
+        return this.ticketService.createTicket(dto.parking_place_id);
+    }
     @Post('/leave-parking')
     deleteTicket(@Body() dto: TicketDto): Promise<Object> {
         return this.ticketService.deleteTicket(dto.unique_id);

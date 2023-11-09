@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectors } from "../../redux/reducers/places";
 import styles from "./SeeParking.module.css";
@@ -8,6 +8,8 @@ import RowPlaces from "../../components/RowParking/RowPlaces/RowPlaces";
 import RowEmpty from "../../components/RowParking/RowEmpty/RowEmpty";
 
 export default function SeeParking() {
+  const [ selectedPlace, setSelectedPlace ] = useState< string | undefined>(undefined); 
+
   const parking: any = useSelector(selectors.getPlacesValue);
 
   const informations = useRef<HTMLDivElement>(null);
@@ -28,8 +30,10 @@ export default function SeeParking() {
     }
 
     const placeNumber = button.dataset.place;
+    setSelectedPlace(placeNumber);
+
     if (placeSelected.current) {
-      placeSelected.current.innerHTML = `<span>Place :</span>${placeNumber}`;
+      placeSelected.current.innerHTML = `<span>Place :</span>${selectedPlace}`;
     }
     map.current?.classList.add(styles.close);
   };
@@ -55,7 +59,7 @@ export default function SeeParking() {
           <h2 className={`important ${styles.title}`} ref={placeSelected}></h2>
           <div className={styles.buttonContainer}>
             <p>Pas de ticket ?</p>
-            <a href={paths.GET_TICKET} className={`${styles.button} button`}>
+            <a href={`${paths.GET_TICKET}${selectedPlace !== undefined ? `?place=${selectedPlace}` : null}`} className={`${styles.button} button`}>
               Prendre cette place
             </a>
           </div>
