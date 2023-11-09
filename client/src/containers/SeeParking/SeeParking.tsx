@@ -32,9 +32,6 @@ export default function SeeParking() {
     const placeNumber = button.dataset.place;
     setSelectedPlace(placeNumber);
 
-    if (placeSelected.current) {
-      placeSelected.current.innerHTML = `<span>Place :</span>${selectedPlace}`;
-    }
     map.current?.classList.add(styles.close);
   };
 
@@ -56,7 +53,7 @@ export default function SeeParking() {
           className={`${styles.informations} ${styles.hidden}`}
           ref={informations}
         >
-          <h2 className={`important ${styles.title}`} ref={placeSelected}></h2>
+          <h2 className={`important ${styles.title}`} ref={placeSelected}><span>Place :</span>{selectedPlace}</h2>
           <div className={styles.buttonContainer}>
             <p>Pas de ticket ?</p>
             <a href={`${paths.GET_TICKET}${selectedPlace !== undefined ? `?place=${selectedPlace}` : null}`} className={`${styles.button} button`}>
