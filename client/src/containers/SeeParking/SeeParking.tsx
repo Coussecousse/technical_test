@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectors } from "../../redux/reducers/places";
 import styles from "./SeeParking.module.css";
@@ -13,6 +13,7 @@ export default function SeeParking() {
     undefined
   );
 
+  
   const parking: any = useSelector(selectors.getPlacesValue);
 
   const informations = useRef<HTMLDivElement>(null);

@@ -2,6 +2,9 @@ import { useRef, useState } from "react";
 import styles from "./TicketForm.module.css";
 
 import paths from "../../config/paths";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { updatePlaces } from "../../redux/reducers/places/actions/placesActions";
 
 interface Data {
   status: string;
@@ -16,6 +19,8 @@ export default function TicketForm({
   formForLeaving,
   place = null,
 }: TicketFormProps) {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [data, setData] = useState<Data | null>(null);
   const input = useRef<HTMLInputElement>(null);
 
@@ -31,7 +36,7 @@ export default function TicketForm({
           unique_id: (e.currentTarget.elements[0] as HTMLInputElement).value,
           place: place,
         });
-        console.log(body)
+    console.log(body);
     e.preventDefault();
     fetch(path, {
       method: "POST",
@@ -42,6 +47,7 @@ export default function TicketForm({
     })
       .then((res) => res.json())
       .then((data) => {
+        dispatch(updatePlaces());
         setData(data);
       })
       .catch((err) => {
@@ -55,7 +61,14 @@ export default function TicketForm({
         if (input.current) {
           input.current.value = "";
         }
-        return <p className={`data-message`}>✅{ formForLeaving ? 'Vous avez quitté le parking' : 'Vous avez bien changé de place.'}</p>;
+        return (
+          <p className={`data-message`}>
+            ✅
+            {formForLeaving
+              ? "Vous avez quitté le parking"
+              : "Vous avez bien changé de place."}
+          </p>
+        );
       } else if (data.status === "error") {
         return (
           <p className={`data-message data-error`}>❌Erreur : {data.message}</p>
@@ -66,16 +79,16 @@ export default function TicketForm({
 
   return (
     <div className={`ticket container ${styles.leaveTicket}`}>
-    <form onSubmit={handleForm} className={styles.form}>
+      <form onSubmit={handleForm} className={styles.form}>
         <label htmlFor='ticket_id'>ID de votre ticket :</label>
         <div className={`${styles.inputContainer} inputContainer`}>
-        <input type='number' name='ticket_id' id='ticket_id' ref={input} />
-        {handleResponse()}
+          <input type='number' name='ticket_id' id='ticket_id' ref={input} />
+          {handleResponse()}
         </div>
         <button type='submit' className={`${styles.button} button`}>
-        {formForLeaving ? 'Quitter le parking' : 'Changer de place'}
+          {formForLeaving ? "Quitter le parking" : "Changer de place"}
         </button>
-    </form>
+      </form>
     </div>
   );
 }

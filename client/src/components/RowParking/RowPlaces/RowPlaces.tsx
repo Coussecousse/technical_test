@@ -16,10 +16,10 @@ export default function RowPlaces({
   handleButton,
 }: RowPlacesProps) {
   const parking: any = useSelector(selectors.getPlacesValue);
-  // const buttons: JSX.Element[] = [];
   const [buttons, setButtons] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
+    setButtons([]);
     for (let i = index; i <= max; i++) {
       if (parking.places.length === 0) return;
       const place = parking.places[i];
@@ -33,6 +33,6 @@ export default function RowPlaces({
       );
       setButtons((buttons) => [...buttons, button]);
     }
-  }, []);
+  }, [parking]);
   return <div className={styles.places}>{buttons}</div>;
 }
