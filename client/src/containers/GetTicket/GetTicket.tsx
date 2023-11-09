@@ -12,8 +12,8 @@ interface Data {
 }
 
 interface ErrorData {
-  error : boolean,
-  message: string
+  error: boolean;
+  message: string;
 }
 
 export default function GetTicket() {
@@ -24,43 +24,46 @@ export default function GetTicket() {
   const query = new URLSearchParams(window.location.search);
   const placeSelected = query.toString() !== "" ? query.get("place") : null;
 
-  const fetchData = async (method:string | undefined = 'GET', body: null | Object = null) => {
+  const fetchData = async (
+    method: string | undefined = "GET",
+    body: null | Object = null
+  ) => {
     try {
       const res = await fetch(paths.GET_TICKET_API, {
         method,
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: body ? JSON.stringify(body) : null
+        body: body ? JSON.stringify(body) : null,
       });
       if (!res.ok) {
-        throw new Error("La place non disponible.", {cause :"PlaceNotAvailable"});
+        throw new Error("Une erreur est survenue");
       }
       const data = await res.json();
+      if (data.status === "error") {
+        throw new Error(data.message);
+      }
       return data;
-    }
-    catch (err) {
-      console.log(err);
+    } catch (err: any) {
       throw err;
     }
-  }
+  };
 
   const getData = async () => {
     try {
-      const data = placeSelected ? 
-      await fetchData('POST', { parking_place_id: placeSelected }) :
-      await fetchData();
+      const data = placeSelected
+        ? await fetchData("POST", { parking_place_id: placeSelected })
+        : await fetchData();
       setData(data);
       dispatch(updatePlaces());
+    } catch (err: any) {
+      setError((prevState) => ({
+        ...prevState,
+        error: true,
+        message: err.message,
+      }));
     }
-    catch (err: any) {      
-      if (err.cause === "PlaceNotAvailable") {
-        setError(prevState => ({ ...prevState, error: true, message: "❌La place n'est pas disponible." }));
-      } else {
-        setError(prevState => ({ ...prevState, error: true, message: "Une erreur est survenue" }));
-      }
-    }
-  } 
+  };
 
   useEffect(() => {
     if (data) return;
@@ -72,10 +75,11 @@ export default function GetTicket() {
       <div className={`ticket container ${styles.getTicket}`}>
         {error ? (
           <>
-            <p>{error.message}</p>
-            <a href={paths.GET_TICKET} className={`${styles.button} button`}>Nouveau ticket</a>
+            <p className={`data-error`}>❌{error.message}</p>
+            <a href={paths.GET_TICKET} className={`${styles.button} button`}>
+              Nouveau ticket
+            </a>
           </>
-          
         ) : (
           <>
             <h2 className='important'>

@@ -1,10 +1,4 @@
-import { useRef, useState } from 'react';
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
-import { updatePlaces } from '../../redux/reducers/places/actions/placesActions';
-import styles from './LeaveParking.module.css'
-
-import paths from "../../config/paths"
+import TicketForm from '../../components/TicketForm/TicketForm';
 
 interface Data {
     status: string,
@@ -13,61 +7,9 @@ interface Data {
 
 export default function LeaveParking() {
 
-    const [data, setData] = useState<Data | null>(null);
-    const input = useRef<HTMLInputElement>(null);
-
-    const dispatch = useDispatch<AppDispatch>();
-
-    const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        fetch(paths.LEAVE_PARKING_API,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                unique_id: (e.currentTarget.elements[0] as HTMLInputElement).value
-            })
-        
-        })
-        .then(res => res.json())
-        .then(data => {
-            dispatch(updatePlaces());
-            setData(data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
-
-    const handleResponse = () => {
-        if (data) {
-            if (data.status === 'success') {
-                if (input.current) {
-                    input.current.value = '';
-                }
-                return <p className={`data-message`}>✅Vous avez quitté le parking</p>
-            } else if (data.status === 'error') {
-                return <p className={`data-message data-error`}>❌Erreur : {data.message}</p>
-            }
-        }
-    }  
-    
-
     return (
         <main>
-            <div className={`ticket container ${styles.leaveTicket}`}>
-                <form onSubmit={handleForm} className={styles.form}>
-                    <label htmlFor="ticket_id">
-                        ID de votre ticket :
-                    </label>
-                    <div className={`${styles.inputContainer} inputContainer`}>
-                        <input type="number" name="ticket_id" id="ticket_id" ref={input}/>
-                        {handleResponse()}
-                    </div>
-                    <button type="submit" className={`${styles.button} button`}>Quitter le parking</button>
-                </form>
-            </div>
+            <TicketForm formForLeaving={true} place={null}/>
         </main>
     )
 }

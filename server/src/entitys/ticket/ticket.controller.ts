@@ -8,12 +8,12 @@ export class TicketController {
   constructor(private ticketService: TicketService) {}
 
   @Get('/create-ticket')
-  createTicket(): Promise<Ticket> {
+  createTicket(): Promise<Ticket | Object> {
     return this.ticketService.createTicket();
   }
 
   @Post('/create-ticket')
-  createTicketPost(@Body() dto: TicketDto): Promise<Ticket> {
+  createTicketPost(@Body() dto: TicketDto): Promise<Ticket | Object> {
     return this.ticketService.createTicket(dto.parking_place_id);
   }
 

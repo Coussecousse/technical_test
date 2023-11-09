@@ -165,6 +165,7 @@ button {
 main {
   min-height: calc(100vh - 50px);
   display: flex;
+  padding: 3rem 0;
 }
 /* HEADER ACTIVE LINKS */
 header nav a.active {

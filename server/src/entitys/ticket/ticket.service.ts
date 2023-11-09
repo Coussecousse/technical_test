@@ -2,6 +2,7 @@ import { Injectable, Inject } from "@nestjs/common";
 import { Ticket } from "./entity/ticket.entity";
 import { generateRandomId } from "./utils/ticketUtils";
 import { ParkingPlaceService } from "../parking_place/parkingPlace.service";
+import { errors } from "src/errors/errors";
 
 @Injectable()
 export class TicketService {
@@ -11,10 +12,13 @@ export class TicketService {
         private parkingPlaceService : ParkingPlaceService
     ) {}
     
-    async createTicket(placeSelected: number | null = null): Promise<Ticket> {
+    async createTicket(placeSelected: number | null = null): Promise<Ticket | Object> {
         try {
             const unique_id = await generateRandomId();
             const places_available = await this.parkingPlaceService.findAllAvailable();
+            if (places_available.length === 0){
+                return errors.PARKING_FULL
+            }
 
             let place: number;
             if (placeSelected) {
@@ -23,7 +27,7 @@ export class TicketService {
                 if (placeSelectedAvailable) {
                     place = placeSelectedAvailable.place;
                 } else {
-                    throw new Error('Place non disponible');
+                    return errors.PLACE_TAKEN;
                 }
             } else {
                 const randomIndex = Math.floor(Math.random() * places_available.length);
@@ -41,11 +45,12 @@ export class TicketService {
             return ticket;
         }
         catch(err) {
+            console.log(err)
             if (err === 'SequelizeUniqueConstraintError') {
                 return this.createTicket();
             } 
             else {
-                throw err;
+                return errors.DEFAULT;
             }
         }
     }
@@ -58,7 +63,7 @@ export class TicketService {
             return { status: 'success' };
         } catch (err) {
             if (err) {
-                return { status: 'error', message: 'Mauvais ID.' };
+                return errors.WRONG_ID;
             }
         }
     }
@@ -66,14 +71,18 @@ export class TicketService {
     async updateTicket(unique_id : number, place : number): Promise<Object> {
         try {
             const ticket = await this.ticketRepository.findOne<Ticket>({ where: { unique_id : unique_id } });
-            
+                        
+            if (ticket.parking_place_id == place) {
+                return errors.SAME_PLACE;
+            }
+
             const previousPlaceID = ticket.parking_place_id;
             const previousPlace = await this.parkingPlaceService.findOne(previousPlaceID);
             previousPlace.update({ occupied : false, ticket_unique_id : null });
 
             const newParkingPlace = await this.parkingPlaceService.findOne(place);
             if (newParkingPlace.occupied) {
-                return {status: 'error', message: 'Place déjà occupée.'};
+                return errors.PLACE_TAKEN;
             }
             newParkingPlace.update({ occupied : true, ticket_unique_id : unique_id });
 
@@ -81,11 +90,11 @@ export class TicketService {
             return { status: 'success'}
         } catch (err) {
             if (err.name === 'SequelizeUniqueConstraintError') {
-                return {status: 'error', message: 'Place déjà occupée.'}
+                return errors.PLACE_TAKEN
             } else if (err.name === 'SequelizeValidationError') {
-                return { status: 'error', message : 'Mauvais ID.'}
+                return errors.WRONG_ID;
             } else {
-                throw { status: 'error', message : 'Une erreur est survenue.'};
+                return errors.DEFAULT;
             }
         }
     }

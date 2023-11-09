@@ -103,6 +103,8 @@
     font-size: var(--fs-600);
 }
 .car span {
+    min-width: 20px;
+    text-align: center;
     font-size: 12px;
     color: black;
     position: absolute;
