@@ -4,13 +4,11 @@ interface ButtonPlaceProps {
     handleButton: (event: React.MouseEvent<HTMLButtonElement>) => void,
     place: number,
     occupied: boolean,
-    key : number
 }
 
-export default function ButtonPlace({ handleButton, place, occupied, key }: ButtonPlaceProps) {
+export default function ButtonPlace({ handleButton, place, occupied }: ButtonPlaceProps) {
     return (
         <button
-            key={key}
             onClick={handleButton}
             data-place={place}
             data-occupied={occupied}
