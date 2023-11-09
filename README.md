@@ -8,15 +8,19 @@
 git clone https://github.com/Coussecousse/technical_test.git
 ```
 
-- Install the packages
+- Install dependencies
 ```bash
 npm run install
 ```
-### 2. Create your database and set your connexion to it in :
-- server/client/config.json
-- server/client/util/database.providers.tsx
+### 2. Database Configuration :
+- Create your database
+- Set the connection details in the following files :
+  - server/client/config.json
+  - server/client/util/database.providers.tsx
 
 ### 3. Back in terminal : 
-- npm run start
+```bash 
+npm run start
+```
 
 ### 4. You're ready to go !
