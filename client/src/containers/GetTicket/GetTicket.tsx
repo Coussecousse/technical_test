@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import styles from "./GetTicket.module.css";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updatePlaces } from "../../redux/reducers/places/actions/placesActions";
 
+import styles from "./GetTicket.module.css";
 import paths from "../../config/paths";
+import { actionTypes, selectors } from "../../redux/reducers/menu";
 
 interface Data {
   unique_id: string;
@@ -17,9 +19,19 @@ interface ErrorData {
 }
 
 export default function GetTicket() {
+  // MENU
+  const menu: any = useSelector(selectors.getMenuValue);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (menu) {
+      dispatch({ type: actionTypes.CLOSE_MENU });
+    }
+  }, []);
+
+  // DATA
   const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<ErrorData | null>();
-  const dispatch = useDispatch<AppDispatch>();
 
   const query = new URLSearchParams(window.location.search);
   const placeSelected = query.toString() !== "" ? query.get("place") : null;

@@ -1,19 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectors } from "../../redux/reducers/places";
+import { selectors as menuSelectors } from "../../redux/reducers/menu";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 import styles from "./SeeParking.module.css";
 
 import paths from "../../config/paths";
 import RowPlaces from "../../components/RowParking/RowPlaces/RowPlaces";
 import RowEmpty from "../../components/RowParking/RowEmpty/RowEmpty";
 import TicketForm from "../../components/TicketForm/TicketForm";
+import { actionTypes } from "../../redux/reducers/menu";
 
 export default function SeeParking() {
+  // MENU
+  const menu: any = useSelector(menuSelectors.getMenuValue);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    if (menu) {
+      dispatch({ type: actionTypes.CLOSE_MENU });
+    }
+  }, []);
+
   const [selectedPlace, setSelectedPlace] = useState<string | undefined>(
     undefined
   );
 
-  
   const parking: any = useSelector(selectors.getPlacesValue);
 
   const informations = useRef<HTMLDivElement>(null);
@@ -50,8 +63,7 @@ export default function SeeParking() {
     setTimeout(() => {
       ticketChangePlace.current?.classList.remove(styles.hidden);
     }, 200);
-
-  }
+  };
 
   return (
     <main className={styles.main}>
@@ -88,17 +100,21 @@ export default function SeeParking() {
           </div>
           <div className={styles.buttonContainer}>
             <p>Vous avez déjà un ticket ?</p>
-            <button className={`${styles.button} button`} onClick={handleChangeTicket}>
+            <button
+              className={`${styles.button} button`}
+              onClick={handleChangeTicket}
+            >
               Changer de place
             </button>
           </div>
         </div>
       </div>
-      <div id="ticket" className={`${styles.hidden} ${styles.ticket}`} ref={ticketChangePlace}>
-        <TicketForm 
-          formForLeaving={false}
-          place={selectedPlace}
-        />
+      <div
+        id='ticket'
+        className={`${styles.hidden} ${styles.ticket}`}
+        ref={ticketChangePlace}
+      >
+        <TicketForm formForLeaving={false} place={selectedPlace} />
       </div>
     </main>
   );

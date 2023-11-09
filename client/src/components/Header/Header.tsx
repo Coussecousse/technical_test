@@ -9,6 +9,7 @@ import paths from "../../config/paths";
 import { useEffect, useState } from "react";
 
 export default function Header() {
+
   const parking: any = useSelector(placesSelectors.getPlacesValue);
   const [ freePlaces, setFreePlaces ] = useState<number>(0);
 
