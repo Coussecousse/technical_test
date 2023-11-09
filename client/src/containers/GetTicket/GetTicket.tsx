@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./GetTicket.module.css";
-
-import paths from "../../config/paths";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updatePlaces } from "../../redux/reducers/places/actions/placesActions";
+
+import paths from "../../config/paths";
 
 interface Data {
   unique_id: string;

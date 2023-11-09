@@ -1,4 +1,7 @@
 import { useRef, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { updatePlaces } from '../../redux/reducers/places/actions/placesActions';
 import styles from './LeaveParking.module.css'
 
 import paths from "../../config/paths"
@@ -12,6 +15,8 @@ export default function LeaveParking() {
 
     const [data, setData] = useState<Data | null>(null);
     const input = useRef<HTMLInputElement>(null);
+
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -27,6 +32,7 @@ export default function LeaveParking() {
         })
         .then(res => res.json())
         .then(data => {
+            dispatch(updatePlaces());
             setData(data)
         })
         .catch(err => {
