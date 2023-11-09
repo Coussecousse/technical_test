@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "./GetTicket.module.css";
 
 import paths from "../../config/paths";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { updatePlaces } from "../../redux/reducers/places/actions/placesActions";
 
 interface Data {
   unique_id: string,
@@ -12,18 +15,23 @@ export default function GetTicket() {
 
   const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<Boolean>(false);
+  const dispatch = useDispatch<AppDispatch>();
 
 
   useEffect(() => {
     if (data) return;
     fetch(paths.GET_TICKET_API)
     .then(res => res.json())
-    .then(data => setData(data))
+    .then(data => {
+      setData(data)
+      dispatch(updatePlaces()) 
+    })
     .catch(err => {
       console.log(err);
       setError(true)
     }
     );
+
   }, []);
 
   return (
