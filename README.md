@@ -3,9 +3,9 @@
 ## Installation
 ### 1. In your terminal : 
 
-- Clone the project 
+- Clone the project (make sure you're already in a folder)
 ```bash
-git clone https://github.com/Coussecousse/technical_test.git
+git clone https://github.com/Coussecousse/technical_test.git .
 ```
 
 - Install dependencies
