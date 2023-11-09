@@ -31,7 +31,7 @@ export default function TicketForm({
           unique_id: (e.currentTarget.elements[0] as HTMLInputElement).value,
           place: place,
         });
-
+        console.log(body)
     e.preventDefault();
     fetch(path, {
       method: "POST",
@@ -45,7 +45,7 @@ export default function TicketForm({
         setData(data);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.message);
       });
   };
 

@@ -12,5 +12,3 @@ export class ParkingPlaceDto {
     @IsNumber()
     ticket_unique_id : number
 }
-
-// AAA : Peut être inutile

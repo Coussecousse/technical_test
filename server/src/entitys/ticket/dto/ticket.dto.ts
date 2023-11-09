@@ -8,4 +8,8 @@ export class TicketDto {
     @IsNotEmpty()
     @IsNumber()
     parking_place_id: number
+
+    @IsNotEmpty()
+    @IsNumber()
+    place: number
 }

@@ -56,9 +56,36 @@ export class TicketService {
             await ticket.destroy();
             await this.parkingPlaceService.removeTicket(unique_id);
             return { status: 'success' };
-        } catch (error) {
-            if (error) {
+        } catch (err) {
+            if (err) {
                 return { status: 'error', message: 'Mauvais ID.' };
+            }
+        }
+    }
+
+    async updateTicket(unique_id : number, place : number): Promise<Object> {
+        try {
+            const ticket = await this.ticketRepository.findOne<Ticket>({ where: { unique_id : unique_id } });
+            
+            const previousPlaceID = ticket.parking_place_id;
+            const previousPlace = await this.parkingPlaceService.findOne(previousPlaceID);
+            previousPlace.update({ occupied : false, ticket_unique_id : null });
+
+            const newParkingPlace = await this.parkingPlaceService.findOne(place);
+            if (newParkingPlace.occupied) {
+                return {status: 'error', message: 'Place déjà occupée.'};
+            }
+            newParkingPlace.update({ occupied : true, ticket_unique_id : unique_id });
+
+            await ticket.update({ parking_place_id : place });
+            return { status: 'success'}
+        } catch (err) {
+            if (err.name === 'SequelizeUniqueConstraintError') {
+                return {status: 'error', message: 'Place déjà occupée.'}
+            } else if (err.name === 'SequelizeValidationError') {
+                return { status: 'error', message : 'Mauvais ID.'}
+            } else {
+                throw { status: 'error', message : 'Une erreur est survenue.'};
             }
         }
     }
