@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "npm install && cd client && npm install && cd ../server && npm install",
+    "install:custom": "cd client && npm install && cd ../server && npm install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server" : "cd server && nest start --watch",
     "client": "cd client && npm start",

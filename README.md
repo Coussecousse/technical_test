@@ -11,7 +11,11 @@ git clone https://github.com/Coussecousse/technical_test.git .
 
 - Install dependencies
 ```bash
-npm run install
+npm install
+```
+then
+```bash
+npm run install:custom
 ```
 ### 3. Database Configuration :
 - Create your database
