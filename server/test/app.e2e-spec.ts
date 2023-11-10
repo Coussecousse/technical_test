@@ -15,10 +15,66 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterAll(done => {
+    app.close();
+    done()
+  })
+
+  describe('Ticket', function () {
+    it('should create a ticket', async () => {
+      await request(app.getHttpServer())
+        .get('/create-ticket')
+        .expect(200)
+    });
+    
+    it('should create a ticket with a place selected', async () =>  {
+      await request(app.getHttpServer())
+        .get('/create-ticket')
+        .send({parking_place_id : '5'})
+        .expect(200)
+    });
+
+    it('should give an error if wrong value', async () => {
+      await request(app.getHttpServer())
+      .post('/create-ticket')
+      .send({parking_place_id : 'abc'})
+      .expect(400)
+    })
+
+    it('should give an error if place is taken', async () => {
+      await request(app.getHttpServer())
+      .post('/create-ticket')
+      .send({parking_place_id : '1'})
+      .expect(400)
+    })
+
+    it('should delete ticket', async () => {
+      await request(app.getHttpServer())
+        .post('/leave-parking')
+        .send({unique_id : '37923'})
+        .expect(201)
+    })
+    
+    it('should update ticket', async () => {
+      await request(app.getHttpServer())
+        .post('/update-ticket')
+        .send({unique_id : '37923', place : '5'})
+        .expect(200)
+    }) 
+    
+    it('should fail if place already taken', async () => {
+      await request(app.getHttpServer())
+        .post('/update-ticket')
+        .send({unique_id : '37923', place : '8'})
+        .expect(400)
+    })
   });
+
+  describe('Parking', function() {
+    it('should get all parking places', async () => {
+      await request(app.getHttpServer())
+        .get('/get-places')
+        .expect(200)
+    })
+  })
 });

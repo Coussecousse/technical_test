@@ -69,7 +69,7 @@ export default function TicketForm({
               : "Vous avez bien changé de place."}
           </p>
         );
-      } else if (data.status === "error") {
+      } else if (data.status === "400") {
         return (
           <p className={`data-message data-error`}>❌Erreur : {data.message}</p>
         );

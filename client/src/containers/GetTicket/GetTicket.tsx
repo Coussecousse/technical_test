@@ -49,7 +49,7 @@ export default function GetTicket() {
         body: body ? JSON.stringify(body) : null,
       });
       if (!res.ok) {
-        throw new Error("Une erreur est survenue");
+        throw res;
       }
       const data = await res.json();
       if (data.status === "error") {
@@ -69,6 +69,7 @@ export default function GetTicket() {
       setData(data);
       dispatch(updatePlaces());
     } catch (err: any) {
+      err = await err.json();
       setError((prevState) => ({
         ...prevState,
         error: true,

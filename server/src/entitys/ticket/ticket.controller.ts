@@ -8,7 +8,7 @@ export class TicketController {
   constructor(private ticketService: TicketService) {}
 
   @Get('/create-ticket')
-  createTicket(): Promise<Ticket | Object> {
+  createTicket(): Promise<Ticket | Object | Error> {
     return this.ticketService.createTicket();
   }
 

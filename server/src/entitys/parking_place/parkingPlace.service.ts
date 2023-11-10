@@ -1,5 +1,6 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, HttpException } from '@nestjs/common';
 import { ParkingPlace } from './entity/parking_place.entity';
+import { errors } from 'src/errors/errors';
 
 @Injectable()
 export class ParkingPlaceService {
@@ -9,43 +10,72 @@ export class ParkingPlaceService {
   ) {}
 
   async findAll(): Promise<ParkingPlace[]> {
-    return this.parkingPlaceRepository.findAll<ParkingPlace>();
+    try {
+      return this.parkingPlaceRepository.findAll<ParkingPlace>();
+    }
+    catch (error) {
+      throw new HttpException(errors.DEFAULT, 400)
+    }
   }
 
   async findOne(place_id: number): Promise<ParkingPlace> {
-    return this.parkingPlaceRepository.findOne({ where: { place: place_id } });
+    try {
+      return this.parkingPlaceRepository.findOne({ where: { place: place_id } });
+    }
+    catch (error) {
+      throw new HttpException(errors.DEFAULT, 400)
+    }
   }
 
   async findAllAvailable(): Promise<ParkingPlace[]> {
-    return this.parkingPlaceRepository.findAll<ParkingPlace>({
-      where: { occupied: false },
-    });
+    try {
+      return this.parkingPlaceRepository.findAll<ParkingPlace>({
+        where: { occupied: false },
+      });
+    }
+    catch (error) {
+      throw new HttpException(errors.DEFAULT, 400)
+    }
   }
 
   async setTicket(
     place_id: number,
     ticket_unique_id: number,
   ): Promise<ParkingPlace> {
-    const place = await this.parkingPlaceRepository.findOne({
-      where: { place: place_id },
-    });
-
-    return place.update({ occupied: true, ticket_unique_id: ticket_unique_id });
+    try {
+      const place = await this.parkingPlaceRepository.findOne({
+        where: { place: place_id },
+      });
+    
+      return place.update({ occupied: true, ticket_unique_id: ticket_unique_id });
+    }
+    catch (error) {
+      throw new HttpException(errors.DEFAULT, 400)
+    }
   }
 
   async removeTicket(ticket_id: number): Promise<ParkingPlace> {
-    const place = await this.parkingPlaceRepository.findOne({
-      where: {
-        ticket_unique_id: ticket_id,
-      },
-    });
-
-    return place.update({ occupied: false, ticket_unique_id: null });
+    try {
+      const place = await this.parkingPlaceRepository.findOne({
+        where: {
+          ticket_unique_id: ticket_id,
+        },
+      });
+      return place.update({ occupied: false, ticket_unique_id: null });
+    }
+    catch (error) {
+      throw new HttpException(errors.DEFAULT, 400)
+    }
   }
 
   async getAllPlaces(): Promise<ParkingPlace[]> {
-    return this.parkingPlaceRepository.findAll<ParkingPlace>({
-      attributes: ['place', 'occupied'],
-    });
+    try {
+      return this.parkingPlaceRepository.findAll<ParkingPlace>({
+        attributes: ['place', 'occupied'],
+      });
+    }
+    catch (error) {
+      throw new HttpException(errors.DEFAULT, 400)  
+    }
   }
 }
