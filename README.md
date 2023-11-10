@@ -43,7 +43,9 @@ Indeed, I never used Redux, Typescript or NestJS but **HEY**, every language hav
 So I passed my Saturday night and Sunday morning to read documentations and watch youtube videos.
 
 I manage to use Redux or NestJS but ~~fucking hell~~, Typescript ! 
+<p align="center">
   <img src="https://github.com/Coussecousse/technical_test/blob/master/client/src/images/gif.gif" align="center" alt="Angry man shooting a computer">
+</p>
   It was like a child who cry for nothing every time I code something. <br/>
   But after some night with my screen red for some hours, I managed to tame the beast. (Thank you ChatGPT btw)
 
