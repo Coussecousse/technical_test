@@ -44,7 +44,7 @@ So I passed my Saturday night and Sunday morning to read documentations and watc
 
 I manage to use Redux or NestJS but ~~fucking hell~~, Typescript ! 
 <div>
-  <img src="https://media.giphy.com/media/3ohs81rDuEz9ioJzAA/giphy-downsized-large.gif" align="left">
+  <img src="https://media.giphy.com/media/3ohs81rDuEz9ioJzAA/giphy-downsized-large.gif" align="left"></img>
   <div align="center">
   It was like a child who cry for nothing every time I code something. <br/>
   But after some night with my screen red for some hours, I managed to tame the beast. (Thank you ChatGPT btw)
