@@ -52,6 +52,7 @@ export default function Header() {
         </nav>
         <div className={styles.buttonContainer}>
         <button
+          aria-label="Interract with menu"
           className={`${styles.mobileButton} ${isMenuOpen ? styles.open : ""}`}
           onClick={handleMenu}
         >
