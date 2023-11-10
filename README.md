@@ -20,7 +20,7 @@ npm run install
 
 ### 3. Back in terminal : 
 ```bash 
-npm run start
+npm start
 ```
 
 ### 4. You're ready to go !
