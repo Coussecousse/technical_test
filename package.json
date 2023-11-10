@@ -8,7 +8,7 @@
     "server" : "cd server && nest start --watch",
     "client": "cd client && npm start",
     "seed": "cd server && npx sequelize-cli db:seed:all",
-    "start": "concurrently \"npm run server\" \"npm run client\" \"npm run seed\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "test" : "cd server && npm run test:e2e"
   },
   "repository": {

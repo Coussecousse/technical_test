@@ -20,10 +20,13 @@ npm run install:custom
 ### 3. Database Configuration :
 - Create your database
 - Set the connection details in the following files :
-  - server/client/config.json
-  - server/client/util/database.providers.tsx
+  - server/config/config.json
+  - server/src/util/database.providers.tsx
 
 ### 4. Back in terminal : 
+```bash
+npm run seed
+```
 ```bash 
 npm start
 ```
