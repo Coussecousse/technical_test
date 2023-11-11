@@ -21,7 +21,7 @@ npm run install:custom
 - Create your database
 - Set the connection details in the following files :
   - `server/config/config.json`
-  - `server/src/util/database.providers.tsx`
+  - `server/src/util/database.providers.tsx` (the dev server part)
 - ❗ NestJS is listening on port 3001 (`server/src/main.ts`) and I setup a "proxy" on `client/package.json`
 
 ### 4. Back in terminal : 
