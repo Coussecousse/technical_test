@@ -23,6 +23,7 @@ export default function GetTicket() {
   const menu: any = useSelector(selectors.getMenuValue);
   const dispatch = useDispatch<AppDispatch>();
 
+  // eslint-disable-next-line
   useEffect(() => {
     if (menu) {
       dispatch({ type: actionTypes.CLOSE_MENU });
@@ -68,7 +69,9 @@ export default function GetTicket() {
         : await fetchData();
       setData(data);
       dispatch(updatePlaces());
-    } catch (err: any) {
+    } 
+    // eslint-disable-next-line
+    catch (err: any) {
       err = await err.json();
       setError((prevState) => ({
         ...prevState,
@@ -78,6 +81,7 @@ export default function GetTicket() {
     }
   };
 
+  // eslint-disable-next-line
   useEffect(() => {
     if (data) return;
     getData();
