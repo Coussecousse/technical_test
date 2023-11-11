@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install:custom": "cd client && npm install && cd ../server && npm install",
+    "install:custom": "cd client && npm install && cd ../server && npm install && npm i -g @nestjs/cli",
     "server" : "cd server && nest start --watch",
     "client": "cd client && npm start",
     "seed": "cd server && npx sequelize-cli db:seed:all",
