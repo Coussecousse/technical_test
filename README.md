@@ -18,7 +18,7 @@ then
 npm run install:custom
 ```
 ### 3. Database Configuration :
-- Create your database
+- Create your database (I'm using a Apache server and a mysql db)
 - Set the connection details in the following files :
   - `server/config/config.json`
   - `server/src/util/database.providers.tsx` (the dev server part)
@@ -38,7 +38,7 @@ npm run seed
 ### 6. You're ready to go !
 
 ## Storytelling
-Real challenge for me to use not one, not two but **three** languages that I don't know !
+Real challenge for me to use not one, not two but **three** technologies that I don't know !
 Indeed, I never used Redux, Typescript or NestJS but **HEY**, every language have the same logic right ? 
 So I passed my Saturday night and Sunday morning to read documentations and watch youtube videos.
 
