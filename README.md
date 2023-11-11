@@ -51,10 +51,13 @@ I manage to use Redux or NestJS but ~~fucking hell~~, Typescript !
 
 **Anyway.**
 ### I'm not sure about...
-#### The Store
+#### <li> The Store
 I try to use Redux and I conceived the store with states that I need in all my routes like **isMenuOpen** and **parking**. I have states in some routes like **data** or **error** but as I need them only in thoses I thought not including them in the store. Not sure if it's a good practice.
 
-#### A function to update the state parking
+#### <li> I removed the StrictMode
+I know I shouldn't have done this, but when I clicked on "get a ticket," the double render created 2 tickets instead of one.
+
+#### <li> A function to update the state parking
 I try to dispatch with a "correct way" the parking state like isMenuOpen : 
 ```js
 dispatch({ type: actionTypes.CLOSE_MENU });
