@@ -27,17 +27,19 @@ export default function TicketForm({
   
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    
+    const unique_id = (e.currentTarget.elements[0] as HTMLInputElement).value;
+    
     const path = formForLeaving
       ? paths.LEAVE_PARKING_API
       : paths.UPDATE_TICKET_API;
     const body = formForLeaving
       ? JSON.stringify({
-          unique_id: (e.currentTarget.elements[0] as HTMLInputElement).value,
+          unique_id: unique_id ? Number(unique_id) : '',
         })
       : JSON.stringify({
-          unique_id: (e.currentTarget.elements[0] as HTMLInputElement).value,
-          place: place,
+          unique_id: unique_id ? Number(unique_id) : '',
+          place: place ? Number(place) : '',
         });
         fetch(path, {
       method: "POST",

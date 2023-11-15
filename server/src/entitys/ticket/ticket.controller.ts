@@ -14,7 +14,7 @@ export class TicketController {
 
   @Post('/create-ticket')
   createTicketPost(@Body() dto: PlaceDto): Promise<Ticket | Object> {
-      return this.ticketService.createTicket(dto.place);
+      return this.ticketService.createTicket(dto.parking_place_id);
   }
 
   @Post('/leave-parking')

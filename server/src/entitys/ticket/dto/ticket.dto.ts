@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber } from "class-validator"
 export class PlaceDto {
     @IsNumber()
     @IsNotEmpty()
-    place: number
+    parking_place_id: number
 }
 
 export class DeleteTicketDto {

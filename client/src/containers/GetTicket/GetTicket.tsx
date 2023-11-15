@@ -65,7 +65,7 @@ export default function GetTicket() {
   const getData = async () => {
     try {
       const data = placeSelected
-        ? await fetchData("POST", { parking_place_id: placeSelected })
+        ? await fetchData("POST", { parking_place_id: placeSelected ? Number(placeSelected) : '' })
         : await fetchData();
       setData(data);
       dispatch(updatePlaces());
