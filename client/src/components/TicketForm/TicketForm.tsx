@@ -57,7 +57,6 @@ export default function TicketForm({
   };
 
   const handleResponse = () => {
-    console.log(data)
     if (data) {
       if (data.status === "success") {
         if (input.current) {

@@ -14,8 +14,6 @@ export class TicketService {
     
     async createTicket(placeSelected: number | null = null): Promise<Ticket | Object> {
         try {
-            if (Number(placeSelected) && typeof Number(placeSelected) !== 'number')  throw new HttpException(errors.WRONG_ID, 400);
-
             // Check if parking is full
             const places_available = await this.parkingPlaceService.findAllAvailable();
             if (places_available.length === 0){
@@ -60,8 +58,6 @@ export class TicketService {
 
     async deleteTicket(unique_id : number): Promise<Object> {
         try { 
-            if (Number(unique_id) && typeof Number(unique_id) !== 'number')  throw new HttpException(errors.WRONG_ID, 400);
-
             const ticket = await this.ticketRepository.findOne<Ticket>({ where: { unique_id : unique_id } });
 
             if (!ticket) {
