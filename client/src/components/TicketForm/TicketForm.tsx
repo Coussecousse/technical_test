@@ -25,6 +25,7 @@ export default function TicketForm({
   const [data, setData] = useState<Data | null>(null);
   const input = useRef<HTMLInputElement>(null);
   
+  // Send form
   const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
@@ -41,6 +42,8 @@ export default function TicketForm({
           unique_id: unique_id ? Number(unique_id) : '',
           place: place ? Number(place) : '',
         });
+
+        // fetch
         fetch(path, {
       method: "POST",
       headers: {

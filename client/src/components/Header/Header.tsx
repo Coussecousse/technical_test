@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function Header() {
 
+  // Get free places for the little button
   const parking: any = useSelector(placesSelectors.getPlacesValue);
   const [ freePlaces, setFreePlaces ] = useState<number>(0);
 
@@ -18,6 +19,8 @@ export default function Header() {
     setFreePlaces(places.length);
   }, [parking]);
 
+
+  // Check if menu is open
   const isMenuOpen = useSelector(selectors.getMenuValue);
   const dispatch = useDispatch();
 

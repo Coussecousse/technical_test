@@ -15,11 +15,13 @@ export default function RowPlaces({
   max,
   handleButton,
 }: RowPlacesProps) {
+  // Get the parking
   const parking: any = useSelector(selectors.getPlacesValue);
+
+  // All the places
   const [buttons, setButtons] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setButtons([]);
     for (let i = index; i <= max; i++) {
       if (parking.places.length === 0) return;
       const place = parking.places[i];

@@ -23,22 +23,23 @@ export default function SeeParking() {
     }
   }, []);
 
+  // Click on a place
   const [selectedPlace, setSelectedPlace] = useState<string | undefined>(
     undefined
   );
-
-  const parking: any = useSelector(selectors.getPlacesValue);
 
   const informations = useRef<HTMLDivElement>(null);
   const map = useRef<HTMLDivElement>(null);
   const placeSelected = useRef<HTMLHeadingElement>(null);
   const ticketChangePlace = useRef<HTMLDivElement>(null);
 
+  // Click on a place
   const handleButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     const button = e.currentTarget;
 
     if (button.dataset.occupied === "true") return;
 
+    // Depending on the width of the screen, the animation is different
     if (window.innerWidth >= 768) {
       setTimeout(() => {
         informations.current?.classList.remove(styles.hidden);
@@ -53,6 +54,7 @@ export default function SeeParking() {
     map.current?.classList.add(styles.close);
   };
 
+  // Move the screen to the ticket form
   const handleChangeTicket = () => {
     const rect = ticketChangePlace.current?.getBoundingClientRect();
     const top = rect?.top;
@@ -69,7 +71,6 @@ export default function SeeParking() {
     <main className={styles.main}>
       <div className={`container ${styles.elementsContainer}`}>
         <div className={styles.map} ref={map}>
-          {parking.places.length > 0 && (
             <>
               <RowPlaces index={0} max={9} handleButton={handleButton} />
               <RowEmpty></RowEmpty>
@@ -77,7 +78,7 @@ export default function SeeParking() {
               <RowPlaces index={20} max={29} handleButton={handleButton} />
               <RowEmpty></RowEmpty>
             </>
-          )}
+          
         </div>
         <div
           className={`${styles.informations} ${styles.hidden}`}

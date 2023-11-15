@@ -34,6 +34,7 @@ export default function GetTicket() {
   const [data, setData] = useState<Data | null>(null);
   const [error, setError] = useState<ErrorData | null>();
 
+  // If a place is selected
   const query = new URLSearchParams(window.location.search);
   const placeSelected = query.toString() !== "" ? query.get("place") : null;
 
@@ -81,6 +82,7 @@ export default function GetTicket() {
     }
   };
 
+  // create a ticket
   // eslint-disable-next-line
   useEffect(() => {
     if (data) return;

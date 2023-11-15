@@ -19,9 +19,12 @@ export class TicketService {
             if (places_available.length === 0){
                 throw new HttpException(errors.PARKING_FULL, 400);
             }
-            
+
+            // Generate unique id 
             const unique_id = await generateRandomId();
             let place: number;
+
+            // Check if placeSelected is used
             if (placeSelected) {
                 // Check if placeSelected is available in parking
                 const placeSelectedAvailable = places_available.find(place => place.place == placeSelected);
@@ -31,6 +34,7 @@ export class TicketService {
                     throw new HttpException(errors.PLACE_TAKEN, 400);
                 }
             } else {
+                // Get random place
                 const randomIndex = Math.floor(Math.random() * places_available.length);
                 place = places_available[randomIndex].place;
             }
@@ -58,13 +62,17 @@ export class TicketService {
 
     async deleteTicket(unique_id : number): Promise<Object> {
         try { 
+            // Search ticket
             const ticket = await this.ticketRepository.findOne<Ticket>({ where: { unique_id : unique_id } });
 
+            // Check if ticket exists
             if (!ticket) {
                 throw new HttpException(errors.WRONG_ID, 400);
             }
 
+            // delete parking place
             await ticket.destroy();
+            // update parking place
             await this.parkingPlaceService.removeTicket(unique_id);
 
             return { status: 'success' };
@@ -81,16 +89,20 @@ export class TicketService {
 
     async updateTicket(unique_id : number, place : number): Promise<Object> {
         try {
+            //Search ticket
             const ticket = await this.ticketRepository.findOne<Ticket>({ where: { unique_id : unique_id } });
             
+            // Check if ticket exists 
             if (!ticket) {
                 throw new HttpException(errors.WRONG_ID, 400);
             }   
 
+            // Check if place is the same
             if (ticket.parking_place_id == place) {
                 throw new HttpException(errors.SAME_PLACE, 400);
             }
 
+            // Check if place is available
             const newParkingPlace = await this.parkingPlaceService.findOne(place);
             if (newParkingPlace.occupied) {
                 throw new HttpException(errors.PLACE_TAKEN, 400);
@@ -110,7 +122,7 @@ export class TicketService {
             return { status: 'success'}
         } catch (err) {
             if (err.name === 'SequelizeUniqueConstraintError') {
-                return errors.PLACE_TAKEN
+                return errors.PLACE_TAKEN;
             } else if (err.name === 'SequelizeValidationError') {
                 throw new HttpException(errors.WRONG_ID, 400);
             } else if (err.name === 'HttpException') {
