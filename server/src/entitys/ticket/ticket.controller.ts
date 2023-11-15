@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { TicketService } from './ticket.service';
 import { Ticket } from './entity/ticket.entity';
-import { TicketDto } from './dto/ticket.dto';
+import { DeleteTicketDto, PlaceDto, UpdateTicketDto } from './dto/ticket.dto';
 
 @Controller()
 export class TicketController {
@@ -13,17 +13,17 @@ export class TicketController {
   }
 
   @Post('/create-ticket')
-  createTicketPost(@Body() dto: TicketDto): Promise<Ticket | Object> {
-    return this.ticketService.createTicket(dto.parking_place_id);
+  createTicketPost(@Body() dto: PlaceDto): Promise<Ticket | Object> {
+      return this.ticketService.createTicket(dto.place);
   }
 
   @Post('/leave-parking')
-  deleteTicket(@Body() dto: TicketDto): Promise<Object> {
+  deleteTicket(@Body() dto: DeleteTicketDto): Promise<Object> {
     return this.ticketService.deleteTicket(dto.unique_id);
   }
 
   @Post('/update-ticket')
-  UpdateTicket(@Body() ticket: TicketDto): Promise<Object> {
+  UpdateTicket(@Body() ticket: UpdateTicketDto): Promise<Object> {
     return this.ticketService.updateTicket(ticket.unique_id, ticket.place);
   }
 }

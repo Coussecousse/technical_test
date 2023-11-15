@@ -76,7 +76,7 @@ export default function GetTicket() {
       setError((prevState) => ({
         ...prevState,
         error: true,
-        message: err.message,
+        message: (typeof err.message !== 'object' ? err.message : err.message[0].message),
       }));
     }
   };

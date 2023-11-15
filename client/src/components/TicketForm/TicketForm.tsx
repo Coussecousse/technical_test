@@ -8,7 +8,8 @@ import { updatePlaces } from "../../redux/reducers/places/actions/placesActions"
 
 interface Data {
   status: string;
-  message: string;
+  message: any;
+  statusCode: string;
 }
 interface TicketFormProps {
   formForLeaving: boolean;
@@ -56,6 +57,7 @@ export default function TicketForm({
   };
 
   const handleResponse = () => {
+    console.log(data)
     if (data) {
       if (data.status === "success") {
         if (input.current) {
@@ -69,9 +71,9 @@ export default function TicketForm({
               : "Vous avez bien changé de place."}
           </p>
         );
-      } else if (data.status === "400") {
+      } else  {
         return (
-          <p className={`data-message data-error`}>❌Erreur : {data.message}</p>
+          <p className={`data-message data-error`}>❌Erreur : {typeof data.message !== 'object' ? data.message : data.message[0].message}</p>
         );
       }
     }

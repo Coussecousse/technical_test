@@ -1,15 +1,23 @@
-import { IsNotEmpty, IsNumber, isNumber } from "class-validator"
+import { IsNotEmpty, IsNumber } from "class-validator"
 
-export class TicketDto {
+export class PlaceDto {
+    @IsNumber()
+    @IsNotEmpty()
+    place: number
+}
+
+export class DeleteTicketDto {
+    @IsNumber()
+    @IsNotEmpty()
+    unique_id: number
+}
+
+export class UpdateTicketDto {
     @IsNumber()
     @IsNotEmpty()
     unique_id: number
 
-    @IsNotEmpty()
     @IsNumber()
-    parking_place_id: number
-
     @IsNotEmpty()
-    @IsNumber()
     place: number
 }
